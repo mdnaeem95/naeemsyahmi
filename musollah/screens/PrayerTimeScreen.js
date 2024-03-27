@@ -2,9 +2,11 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
 
 import { fetchPrayerTimes } from '../api/services/fetchPrayerTimes'
+import PrayerTimeItem from '../components/PrayerTimeItem';
 
 const PrayerTimeScreen = () => {
   const [prayerTimes, setPrayerTimes] = useState(null);
+  const desiredPrayers = ['Fajr', 'Dhuhr', 'Asr', 'Maghrib', 'Isha']
 
   useEffect(() => {
     const fetchPrayerTimesData = async () => {
@@ -23,11 +25,9 @@ const PrayerTimeScreen = () => {
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       {prayerTimes ? (
         <View>
-          <Text>Fajr: {prayerTimes.data.timings.Fajr}</Text>
-          <Text>Dhuhr: {prayerTimes.data.timings.Dhuhr}</Text>
-          <Text>Asr: {prayerTimes.data.timings.Asr}</Text>
-          <Text>Maghrib: {prayerTimes.data.timings.Maghrib}</Text>
-          <Text>Isha: {prayerTimes.data.timings.Isha}</Text>
+          {desiredPrayers.map((prayer) => (
+            <PrayerTimeItem key={prayer} name={prayer} time={prayerTimes.data.timings[prayer]} />
+          ))}
         </View>
       ) : (
         <View>
