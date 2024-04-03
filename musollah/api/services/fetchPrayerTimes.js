@@ -7,7 +7,7 @@ export const fetchPrayerTimes = async (city, date) => {
         }
 
         const data = await response.json();
-        console.log(data);
+        //console.log(data);
         return data;
     } catch (error) {
         console.error('Error fetching prayer times: ', error);
