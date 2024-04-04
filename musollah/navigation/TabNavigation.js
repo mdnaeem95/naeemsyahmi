@@ -6,6 +6,7 @@ import PrayerTimeScreen from '../screens/PrayerTimeScreen'
 import MusollahScreen from '../screens/MusollahScreen'
 import SettingsScreen from '../screens/SettingsScreen'
 import QiblaScreen from '../screens/QiblaScreen'
+import QuranScreen from '../screens/QuranScreen'
 
 const Tab = createBottomTabNavigator();
 
@@ -16,6 +17,7 @@ const TabNavigation = () => {
       <Tab.Screen name='Qibla' component={QiblaScreen} />
       <Tab.Screen name='Musollah' component={MusollahScreen} />
       <Tab.Screen name='Settings' component={SettingsScreen} />
+      <Tab.Screen name='Quran' component={QuranScreen} />
     </Tab.Navigator>
   )
 }

@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
-import MapView, { AnimatedRegion } from 'react-native-maps';
+import React, { useRef } from 'react'
+import MapView from 'react-native-maps';
 import * as Location from 'expo-location'
 import { useEffect, useState } from 'react';
+import Map from '../components/Map';
 
 const MusollahScreen = () => {
   const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      
-      let { status } = await Location.requestForegroundPermissionsAsync();
+  const mapRef = useRef();
+
+  async function getCurrentLocation() {
+    let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== 'granted') {
         setErrorMsg('Permission to access location was denied');
         return;
@@ -19,22 +19,15 @@ const MusollahScreen = () => {
 
       let location = await Location.getCurrentPositionAsync({});
       setLocation(location);
-    })();
-  }, []);
-
-  let text = 'Waiting..';
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
   }
+
+  useEffect(() => {
+    getCurrentLocation();
+  }, []);
 
   return (
     <View style={styles.container}>
-      <MapView 
-        style={styles.map} 
-        showsUserLocation={true}
-       />
+      <Map mapRef={mapRef} region={location} />
     </View>
   )
 }
