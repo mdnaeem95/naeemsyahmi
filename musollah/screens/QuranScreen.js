@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
+import SurahItem from '../components/SurahItem'
 
 import { fetchSurahs } from '../api/services/fetchSurahs';
 
@@ -20,11 +21,15 @@ const QuranScreen = () => {
     }, [])
 
     return (
-        <View>
-            {surahs.map(surah => (
-                <Text key={surah.number}>{surah.englishName}</Text>
-            ))}
-        </View>
+        <ScrollView>
+            <View>
+                {surahs.map((surah) => {
+                    return (
+                        <SurahItem key={surah.number} surah={surah} />
+                    )
+                })}
+            </View>
+        </ScrollView>
     )
 }
 
