@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import TabNavigation from './navigation/TabNavigation';
 import { StatusBar } from 'expo-status-bar';
+import 'react-native-gesture-handler';
 
 export default function App() {
   return (

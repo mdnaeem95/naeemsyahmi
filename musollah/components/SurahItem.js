@@ -1,11 +1,13 @@
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Surah = ({ surah }) => {
+const Surah = ({ surah, onPress }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>{surah.englishName}</Text>
-    </View>
+    <TouchableOpacity onPress={() => onPress(surah)}>
+      <View style={styles.container}>
+        <Text style={styles.text}>{surah.englishName}</Text>
+      </View>
+    </TouchableOpacity>
   );
 };
 

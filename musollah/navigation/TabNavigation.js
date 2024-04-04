@@ -16,8 +16,8 @@ const TabNavigation = () => {
       <Tab.Screen name='Prayers' component={PrayerTimeScreen} />
       <Tab.Screen name='Qibla' component={QiblaScreen} />
       <Tab.Screen name='Musollah' component={MusollahScreen} />
-      <Tab.Screen name='Settings' component={SettingsScreen} />
       <Tab.Screen name='Quran' component={QuranScreen} />
+      <Tab.Screen name='Settings' component={SettingsScreen} />
     </Tab.Navigator>
   )
 }

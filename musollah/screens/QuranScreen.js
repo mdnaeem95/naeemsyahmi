@@ -1,10 +1,17 @@
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet, View } from 'react-native'
 import React, { useEffect, useState } from 'react'
+import { useNavigation } from '@react-navigation/native';
 import SurahItem from '../components/SurahItem'
 
 import { fetchSurahs } from '../api/services/fetchSurahs';
+import { createStackNavigator } from '@react-navigation/stack';
+import SurahScreen from './SurahScreen';
 
-const QuranScreen = () => {
+const Stack = createStackNavigator();
+
+const QuranStack = () => {
+    const navigation = useNavigation();
+
     const [surahs, setSurahs] = useState([]);
 
     useEffect(() => {
@@ -20,16 +27,29 @@ const QuranScreen = () => {
         loadSurahs();
     }, [])
 
+    const handleSuruhPress = (surah) => {
+        navigation.navigate('SurahScreen', { surah });
+    }
+
     return (
         <ScrollView>
             <View>
                 {surahs.map((surah) => {
                     return (
-                        <SurahItem key={surah.number} surah={surah} />
+                        <SurahItem key={surah.number} surah={surah} onPress={handleSuruhPress} />
                     )
                 })}
             </View>
         </ScrollView>
+    )
+}
+
+const QuranScreen = () => {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="QuranStack" component={QuranStack} options={{ headerShown: false }} />
+            <Stack.Screen name="SurahScreen" component={SurahScreen} />
+        </Stack.Navigator>
     )
 }
 
