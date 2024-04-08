@@ -48,7 +48,7 @@ const QuranScreen = () => {
     return (
         <Stack.Navigator>
             <Stack.Screen name="QuranStack" component={QuranStack} options={{ headerShown: false }} />
-            <Stack.Screen name="SurahScreen" component={SurahScreen} />
+            <Stack.Screen name="SurahScreen" component={SurahScreen}/>
         </Stack.Navigator>
     )
 }
