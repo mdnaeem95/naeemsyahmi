@@ -13,7 +13,7 @@ const fetchMusollahs = async () => {
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Request-Headers': '*',
-          'api-key': '1yGP7j1tFlbmd3tmyj4wJYZj6rjklFtOF8PNB8ieC9vyriu04yk07PVWgYBsgdvG',
+          'api-key': process.env.MONGODB_API_KEY,
         },
         data: data
     };
