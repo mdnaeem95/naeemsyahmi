@@ -1,11 +1,10 @@
-import React, { MutableRefObject } from "react";
-import MapView, { LatLng, Marker, Region } from "react-native-maps";
+import React from "react";
+import MapView, { Marker } from "react-native-maps";
 import { StyleSheet } from "react-native";
 
-const Map = ({ mapRef, region }) => {
+const Map = ({ region, musollahs }) => {
   return (
     <MapView
-        ref={mapRef}
         style={styles.map}
         initialRegion={region}
         showsUserLocation
@@ -13,6 +12,13 @@ const Map = ({ mapRef, region }) => {
         zoomEnabled
         scrollEnabled
     >
+      {musollahs.map((musollah) => (
+        <Marker
+          key={musollah._id}
+          coordinate={{ latitude: musollah.latitude, longitude: musollah.longitude }}
+          title={musollah.building}
+          />
+      ))}
     </MapView>
   )
 }

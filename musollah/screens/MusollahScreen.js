@@ -1,14 +1,13 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React, { useRef } from 'react'
-import MapView from 'react-native-maps';
 import * as Location from 'expo-location'
 import { useEffect, useState } from 'react';
 import Map from '../components/Map';
+import fetchMusollahs from '../api/services/fetchMusollahs';
 
 const MusollahScreen = () => {
   const [location, setLocation] = useState(null);
-
-  const mapRef = useRef();
+  const [musollahs, setMusollahs] = useState([]);
 
   async function getCurrentLocation() {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -18,16 +17,28 @@ const MusollahScreen = () => {
       }
 
       let location = await Location.getCurrentPositionAsync({});
-      setLocation(location);
+      const region = {
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: 0.005,
+        longitudeDelta: 0.005,
+      };
+      setLocation(region);
   }
 
   useEffect(() => {
     getCurrentLocation();
+    fetchMusollahs().then(data => {
+      console.log(data)
+      setMusollahs(data.documents);
+    }).catch(error => {
+      console.error('Error fetching data:', error);
+    })
   }, []);
 
   return (
     <View style={styles.container}>
-      <Map mapRef={mapRef} region={location} />
+      {location && <Map region={location} musollahs={musollahs} />}
     </View>
   )
 }
